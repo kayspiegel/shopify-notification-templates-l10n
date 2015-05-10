@@ -17,7 +17,7 @@ For example: de, fr, es …
 Please name your translated template according to the orginal, add 2 dashes and the language code (capitalized) and if needed some variations like formal and informal. For example:
 
 ````
-fulfillment-request—DE-du.txt
+fulfillment-request--DE-du.txt
 ````
 
 ### 4. File Types
