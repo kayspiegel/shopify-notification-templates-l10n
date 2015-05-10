@@ -1,0 +1,8 @@
+----
+Ihre Bestellung {{ name }} bei {{ shop_name }}
+----
+{% if billing_address.name %}Hallo {{ billing_address.name }},{% endif %}
+
+
+
+{{ shop_name }}

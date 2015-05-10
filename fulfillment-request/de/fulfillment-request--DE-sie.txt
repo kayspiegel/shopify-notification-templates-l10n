@@ -1,0 +1,41 @@
+----
+Auftrag zur Bestellungsabwicklung für {{ shop_name }}
+----
+{{ service_name }},
+
+Bitte wickeln Sie die unten stehende Bestellung {{ name }} ab.
+
+Gesamtzahl der Artikel: {{ fulfillment.item_count }}
+Einzelstücke: {{ fulfillment.fulfillment_line_items.size }}
+
+Artikel zur Abwicklung:
+{% for line in fulfillment.fulfillment_line_items %}
+  Variante: {{ line.line_item.title }}
+  Artikelnummer: {{ line.line_item.sku }}
+  Menge: {{ line.quantity }}
+  Gewicht in Gramm: {{ line.line_item.grams }}
+  Verkäufer: {{ line.line_item.vendor }}
+{% endfor %}
+{% if shipping_address %}
+Versandadresse:
+
+  {{ shipping_address.name }}{% if shipping_address.company %}
+  {{ shipping_address.company }}{% endif %}
+  {{ shipping_address.address1 }}
+  {{ shipping_address.address2 }}
+  {{ shipping_address.zip }} {{ shipping_address.city }}
+  {{ shipping_address.country }}
+{% if shipping_address.phone %}
+  Telefonkontakt: {{ shipping_address.phone }}
+{% endif %}{% endif %}
+Zusatz zur Liefermethode:
+  {% if shipping_method %}{{ shipping_method.title }}{% else %}Keine{% endif %}
+
+Tracking-Nummer:
+  {% if fulfillment.tracking_number %}{{ fulfillment.tracking_number }}{% else %}Keine{% endif %}
+
+E-Mail des Kunden:
+  {{ email }}
+
+Vielen Dank,
+{{ shop_name }}

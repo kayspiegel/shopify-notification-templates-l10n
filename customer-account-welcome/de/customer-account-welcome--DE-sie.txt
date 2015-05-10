@@ -1,0 +1,11 @@
+----
+Bestätigung Ihres Kundenkonto
+----
+{% if customer.name %}Hallo {{ customer.name }},{% endif %}
+
+Hiermit bestätigen wir die Registrierung Ihres Kundenkonto bei uns ({{ shop.name }}). Das Kundenkonto ist nun aktiv.
+
+Das nächste mal, wenn Sie bei uns im Shop einkaufen, dann können Sie beim Abwickeln Ihrer Bestellung und dem Einloggen Zeit sparen, da Ihre Daten wie die Versandanschrift schon vorausgefüllt sind.
+
+Vielen Dank
+{{ shop.name }}

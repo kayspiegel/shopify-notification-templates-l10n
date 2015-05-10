@@ -1,0 +1,6 @@
+----
+Bestellung {{ name }}
+----
+{{ shop_name }},
+
+{{ customer.name | default: "Ein Kunde" }} hat heute ({{ date | date: "%d.%m.%Y %H:%M" }}) eine neue Bestellung getätigt.

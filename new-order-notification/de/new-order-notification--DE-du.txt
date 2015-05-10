@@ -1,0 +1,28 @@
+----
+[{{shop_name}}] {{ billing_address.name }} hat die Bestellung {{ billing_address.name }} getätigt{% if unacceptable_risks != blank %} (Achtung, es besteht ein Betrungsrisiko){% endif %}
+----
+Hallo {{ shop_name }},
+
+{% if customer.name %}{{ customer.name }}{% else %}Jemand{% endif %} hat heute {{ date | date: "%d.%m.%Y %H:%M" }} folgende Bestellung getätigt:
+
+{% for line in line_items %}{{ line.quantity }}x {{line.title }}    (Artikelnummer: {{ line.sku }})
+{% endfor %}{% if fulfillment_aborted %}
+Die obige Bestellung wurde nicht automatisch abgewickelt, da sie als Betrungsrisiko gekennzeichnet wurde.
+{% endif %}
+{% if unacceptable_risks != blank %}
+Sicherheitskontrolle:
+  Bitte überprüfe die Bestellung im Adminbereich Deines Webshops und kontaktiere ggf. den Kunden um die Bestellung zu verifizieren.
+{% endif %}
+Zahlungsmethode:
+{% if gateway %}  {{ gateway }}{% else %}{% for tx_gateway in unique_gateways %}  {{ tx_gateway }}{% endfor %}{% endif %}
+
+{% if requires_shipping and shipping_address %}Versandmethode:
+{% for shipping_method in shipping_methods %}  {{ shipping_method.title }}
+{% endfor %}
+Shipping address:
+  {{ shipping_address.name }}
+  {{ shipping_address.street }}
+  {{ shipping_address.zip }} {{ shipping_address.city }}
+  {{ shipping_address.country }}
+  {{ shipping_address.phone }}
+{% endif %}

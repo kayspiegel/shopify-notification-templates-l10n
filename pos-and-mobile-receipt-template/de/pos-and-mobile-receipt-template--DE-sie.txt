@@ -1,0 +1,19 @@
+----
+Quittung für Ihre Bestellung {{name}}
+----
+Vielen Dank für Ihre Bestellung bei {{ shop_name }}!
+
+Mit dieser E-Mail bestätigen wir Ihre letzte Bestellung.
+
+Datum {{ date | date: "%d.%m.%Y" }}
+
+Sie haben eingekauft:
+{% for line in line_items %}{{ line.quantity }}x {{line.title }} zu je {{ line.price | money }}
+{% endfor %}
+{% if discounts %}Ermäßigung (code: {{ discounts.first.code }}): {{ discounts_savings | money_with_currency }}{% endif %}
+Zwischensumme  : {{ subtotal_price | money_with_currency  }}{% for tax_line in tax_lines %}
+{{ tax_line.title }}       : {{ tax_line.price | money_with_currency  }}{% endfor %}{% if requires_shipping %}
+Versand  : {{ shipping_price | money_with_currency }}{% endif %}
+Gesamt     : {{ total_price | money_with_currency }}
+
+Vielen Dank für Ihren Einkauf bei {{ shop_name }}! Sie können uns online unter {{ shop.url }} besuchen.

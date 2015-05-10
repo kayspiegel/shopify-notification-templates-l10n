@@ -1,0 +1,19 @@
+----
+Vervollständigen Sie Ihren Kauf
+----
+Hallo{% if billing_address.name %} {{ billing_address.name }}{% endif %},
+
+Ihr Warenkorb bei {{ shop_name }} wurde reserviert und wartet auf Ihre Rückkehr!
+
+Sie haben folgende Artikel in Ihrem Warenkorb hinterlassen:
+
+{% for line in line_items %}{{ line.quantity }}x {{ line.title }}
+{% endfor %}
+
+Es ist noch nicht zu spät! Um Ihre Bestellung zu verfollständigen klicken bitte hier:
+
+{{ url }}
+
+Vielen Dank für Ihren Einkauf!
+
+{{ shop_name }}

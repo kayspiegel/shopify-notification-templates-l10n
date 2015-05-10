@@ -1,0 +1,13 @@
+----
+Deine Bestellung {{ name }} wurde stoniert
+----
+{% if billing_address.name %}Hallo {{ billing_address.first_name }},{% endif %}
+
+Deine Bestellung {{ name }} wurde mit folgender Begründung storniert: {% case cancel_reason %}{% when 'customer' %}Auf eigenen Wunsch.{% when 'inventory' %}Wir haben nicht mehr genug Ware auf Lager um Deine Bestellung zu erfüllen.{% when 'fraud' %}Wir vermuten, es handelt sich um eine betrügerische / fehlerhafte Bestellung.{% when 'other' %}aufgrund unvorhergesehener Umstände.{% endcase %}
+
+{% if financial_status == 'voided' %}Deine Zahlung wurde storniert.{% elsif financial_status == 'refunded' %}Deine Zahlung wurde zurückerstattet.{% endif %}
+
+Bitte antworte auf diese E-Mail, Wenn Du Fragen oder Bedenken hast.
+
+Beste Grüße,
+{{ shop_name }}

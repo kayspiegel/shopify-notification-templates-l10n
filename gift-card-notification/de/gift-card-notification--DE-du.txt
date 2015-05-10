@@ -1,0 +1,15 @@
+----
+Deine {{ shop.name }} Geschenkkarte ist fertig!
+----
+Hallo{% if gift_card.customer %} {{ gift_card.customer.first_name }}{% endif %},
+
+Hier ist Deine {{ shop.name }} Geschenkkarte im Wert von {{ gift_card.initial_value | money_without_trailing_zeros }}.
+{% if gift_card.initial_value != gift_card.balance %}Dein restliches Guthaben beträgt {{ gift_card.balance | money_without_trailing_zeros }}.{% endif %}
+
+Um Deine Geschenkkarte zu sehen oder diese Auszudrucken klicke bitte hier
+<{{ gift_card.url }}>
+
+Hast Du die Geschenkkarte für jemand anderen bestellt? Dann leite diese E-Mail weiter.
+
+Vielen Dank für Deinen Einkauf bei {{ shop.name }}!
+<{{ shop.url }}>

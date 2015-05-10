@@ -1,0 +1,17 @@
+----
+Versand-Update für Ihre Bestellung {{ name }}
+----
+{% if billing_address.name %}Hallo {{ billing_address.name }},{% endif %}
+
+Für die folgenden Artikel Ihrer Bestellung {{ name }} wurde der Versandstatus aktualisiert:
+{% for line in fulfillment.fulfillment_line_items %}
+  {{ line.quantity }}x {{ line.line_item.title }}
+{% endfor %}
+Diese Artikel wurden{% if fulfillment.tracking_company %} via {{ fulfillment.tracking_company }} mit der Tracking-Nummer {{ fulfillment.tracking_number }}{% endif %} versendet.{% if fulfillment.tracking_company %} Sie können den Versandstatus hier abrufen:
+
+{{ fulfillment.tracking_url }}
+
+Bitte haben Sie ein wenig Geduld, wenn der Tracking-Link nicht diret funktioniert. Dieser benötigt ein wenig Zeit um sich zu aktualisieren.{% endif %}
+
+
+Vielen Dank für Ihre Bestellung bei {{ shop_name }}!

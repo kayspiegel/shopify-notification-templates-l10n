@@ -1,0 +1,16 @@
+----
+Anmeldung Ihres Kundenkontos
+----
+{% if customer.name %}Hallo {{ customer.name }},{% endif %}
+
+Ein Kundenkonto wurde für Sie bei uns ({{ shop.name }}) angelegt.
+
+Bitte besuchen Sie diese Adresse, um Ihr Konto zu aktivieren und Ihr Passwort einzurichten:
+
+{{ customer.account_activation_url }}
+
+Falls das Kundenkonto fälschlicherweise angelegt wurde, dann können Sie dieses über den Link hier oben und die Auswahl "Rückgängig machen" wieder löschen.
+
+
+Beste Grüße
+{{ shop.name }}

@@ -1,0 +1,33 @@
+----
+Versandbestätigung Ihrer Bestellung {{ name }}
+----
+{% if billing_address.name %}Hallo {{ billing_address.name }},{% endif %}
+
+{% if fulfillment.item_count == item_count %}Alle{% elsif fulfillment_status == 'fulfilled' %}Die letzten{% else %}Einige{% endif %} Artikel Ihrer Bestellung {{ name }} wurden versendet:
+{% for line in fulfillment.fulfillment_line_items %}
+  {{ line.quantity }}x {{ line.line_item.title }}
+{% endfor %}
+{% if requires_shipping %}Sie wurden {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}an folgende Anschrift gesendet:
+
+  {{ shipping_address.name }}{% if shipping_address.company %}
+  {{ shipping_address.company }}{% endif %}
+  {{ shipping_address.address1 }}
+  {{ shipping_address.address2 }}
+  {{ shipping_address.zip }} {{ shipping_address.city }}
+  {{ shipping_address.country }}
+{% if fulfillment.tracking_numbers.size > 0 %}
+Die Tracking-Nummer lautet:
+{% for tracking_number in fulfillment.tracking_numbers %}
+  {{ tracking_number }}
+{% endfor %}
+Sie können den Versandstatus Ihrer Bestellung über diesen Link abrufen:
+{% for tracking_url in fulfillment.tracking_urls %}
+  {{ tracking_url }}
+{% endfor %}
+Bitte haben Sie ein wenig Geduld, wenn der Tracking-Link nicht diret funktioniert. Dieser benötigt ein wenig Zeit um sich zu aktualisieren.
+{% endif %}{% endif %}{% if fulfillment_status != 'fulfilled' %}
+Sie erhalten eine weitere Bestätigung per E-Mail, sobald wir die noch fehlenden Artikel nachsenden.
+{% endif %}
+
+
+Vielen Dank für Ihre Bestellung bei {{ shop_name }}!

@@ -1,0 +1,37 @@
+----
+Shipping confirmation for order {{ name }}
+----
+{{ 'logo.png' | asset_url | img_tag }}
+{% if billing_address.name %}
+<p>Dear {{ billing_address.name }},</p>
+<p></p>
+{% endif %}
+<p>{% if fulfillment.item_count == item_count %}All{% elsif fulfillment_status == 'fulfilled' %}The last{% else %}Some{% endif %} of the items from order {{ name }} have now been shipped:</p>
+<p>{% for line in fulfillment.fulfillment_line_items %}<img src="{{ line.line_item.product.featured_image | product_img_url: 'small' }}" />{{ line.quantity }}x {{ line.line_item.title }}<br>
+{% endfor %}</p>
+<p>{% if requires_shipping %}They are being shipped {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}to the following address: </p>
+
+<p>{{ shipping_address.name }}<br />
+{{ shipping_address.street }}<br />
+{{ shipping_address.city }}<br />
+{{ shipping_address.province }}
+{{ shipping_address.zip }}<br />
+{{ shipping_address.country }}</p>
+
+{% if fulfillment.tracking_numbers.size > 0 %}
+{% if fulfillment.tracking_numbers.size == 1 %}
+<p>The tracking number for these items is {{ fulfillment.tracking_numbers.first }}. <a href="{{ fulfillment.tracking_urls.first }}">Click here to see the status of your shipment.</a></p>
+{% else %}
+<p>The tracking details for these items are as follows:</p>
+<p>{% for tracking_number in fulfillment.tracking_numbers %} {{ tracking_number }}<br>{% endfor %}</p>
+
+<p>Click the links below for shipping status on these items:</p>
+<p>{% for tracking_url in fulfillment.tracking_urls %} <a href="{{ tracking_url }}">{{ tracking_url }}</a><br>{% endfor %}</p>
+{% endif %}
+
+<p>Please allow some time for the status of the shipment to correctly display at the above address.</p>
+{% endif %}{% endif %}{% if fulfillment_status != 'fulfilled' %}
+<p>You will receive a confirmation email when more items from your order have been shipped.</p>
+{% endif %}
+
+<p>Thank you for ordering from {{ shop_name }}!</p>

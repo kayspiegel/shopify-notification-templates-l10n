@@ -1,0 +1,19 @@
+----
+Receipt for order {{name}}
+----
+Thank you for placing your order with {{ shop_name }}!
+
+This email is to confirm your recent order.
+
+Date {{ date | date: "%m/%d/%Y" }}
+
+You purchased:
+{% for line in line_items %}{{ line.quantity }}x {{line.title }} for {{ line.price | money }} each
+{% endfor %}
+{% if discounts %}Discount (code: {{ discounts.first.code }}): {{ discounts_savings | money_with_currency }}{% endif %}
+Subtotal  : {{ subtotal_price | money_with_currency  }}{% for tax_line in tax_lines %}
+{{ tax_line.title }}       : {{ tax_line.price | money_with_currency  }}{% endfor %}{% if requires_shipping %}
+Shipping  : {{ shipping_price | money_with_currency }}{% endif %}
+Total     : {{ total_price | money_with_currency }}
+
+Thank you for shopping at {{ shop_name }}! You can visit us online at {{ shop.url }}

@@ -1,0 +1,29 @@
+----
+Order confirmation for order {{name}}
+----
+Thank you for placing your order with {{ shop_name }}!
+
+This email is to confirm your recent order.
+
+  Date {{ date | date: "%m/%d/%Y" }}{% if requires_shipping and shipping_address %}
+  
+  Shipping address
+    {{ shipping_address.name }}
+    {{ shipping_address.street }}
+    {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}
+    {{ shipping_address.country }}{% endif %}{% if billing_address %}
+
+  Billing address
+    {{ billing_address.name }}
+    {{ billing_address.street }}
+    {{ billing_address.city }}, {{ billing_address.province }}  {{ billing_address.zip }}
+    {{ billing_address.country }}{% endif %}
+  
+{% for line in line_items %}{{ line.quantity }}x {{line.title }} for {{ line.price | money }} each
+{% endfor %}
+
+{% if discounts %}Discount (code: {{ discounts.first.code }}): {{ discounts_savings | money_with_currency }}{% endif %}
+Subtotal  : {{ subtotal_price | money_with_currency  }}{% for tax_line in tax_lines %}
+{{ tax_line.title }}       : {{ tax_line.price | money_with_currency  }}{% endfor %}{% if requires_shipping %}
+Shipping  : {{ shipping_price | money_with_currency }}{% endif %}
+Total     : {{ total_price | money_with_currency }}
