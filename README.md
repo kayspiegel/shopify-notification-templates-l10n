@@ -15,7 +15,7 @@ HTML Templates will follow shortly. Maybe there are a few more translations out 
 
 Aside from the original templates from [Shopify](https://docs.shopify.com/manual/settings/notifications/default-templates) there is no other language on this repo at the moment :-( I might do the spanish and try the french translation but I’d love you to be part of this tiny repo and contribute
 
-Please read [CONTRIBUTION.md]() for more information on how to contribute.
+Please read [CONTRIBUTION.md](/CONTRIBUTION.md) for more information on how to contribute.
 
 ## Contact
 
