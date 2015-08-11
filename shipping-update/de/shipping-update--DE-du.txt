@@ -11,7 +11,7 @@ Diese Artikel wurden{% if fulfillment.tracking_company %} via {{ fulfillment.tra
 
 {{ fulfillment.tracking_url }}
 
-Bitte habe ein wenig Geduld, wenn der Tracking-Link nicht diret funktioniert. Dieser benötigt ein wenig Zeit um sich zu aktualisieren.
+Bitte habe ein wenig Geduld, wenn der Tracking-Link nicht direkt funktioniert. Dieser benötigt ein wenig Zeit um sich zu aktualisieren.{% endif %}
 
 
 Vielen Dank für Deine Bestellung bei {{ shop_name }}!
